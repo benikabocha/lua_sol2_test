@@ -20,20 +20,28 @@ int main()
 		}
 		std::cout << "\n";
 
-		sol::table table1 = lua["table1"];
-		std::cout << "lua table1 size = " << table1.size() << "\n";
-		for (auto it = table1.begin(); it != table1.end(); ++it)
+		sol::object table1Obj = lua["table1"];
+		if (table1Obj.is<sol::table>())
 		{
-			std::cout << (*it).first.as<int>() << " : " << (*it).second.as<int>() << "\n";
+			sol::table table1 = table1Obj;
+			std::cout << "lua table1 size = " << table1.size() << "\n";
+			for (auto it = table1.begin(); it != table1.end(); ++it)
+			{
+				std::cout << (*it).first.as<int>() << " : " << (*it).second.as<int>() << "\n";
+			}
 		}
 		std::cout << "\n";
 
-		sol::table table2 = lua["table2"];
-		std::cout << "lua table2 size = " << table2.size() << "\n";
-		for (auto it = table2.begin(); it != table2.end(); ++it)
+		sol::object table2Obj = lua["table2"];
+		if (table2Obj.is<sol::table>())
 		{
-			sol::table elem = (*it).second.as<sol::table>();
-			std::cout << "name = " << elem["name"].get<std::string>() << " value = " << elem["value"].get<int>() << "\n";
+			sol::table table2 = table2Obj;
+			std::cout << "lua table2 size = " << table2.size() << "\n";
+			for (auto it = table2.begin(); it != table2.end(); ++it)
+			{
+				sol::table elem = (*it).second.as<sol::table>();
+				std::cout << "name = " << elem["name"].get<std::string>() << " value = " << elem["value"].get<int>() << "\n";
+			}
 		}
 		std::cout << "\n";
 	}
