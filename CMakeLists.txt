@@ -26,3 +26,12 @@ add_custom_command(TARGET sample02 POST_BUILD
     ${CMAKE_CURRENT_SOURCE_DIR}/sample02.lua
     ${CMAKE_CURRENT_BINARY_DIR}/sample02.lua
 )
+
+# sample03
+add_executable(sample03 sample03.cpp)
+target_link_libraries(sample03 lua)
+add_custom_command(TARGET sample03 POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${CMAKE_CURRENT_SOURCE_DIR}/sample03.lua
+    ${CMAKE_CURRENT_BINARY_DIR}/sample03.lua
+)
